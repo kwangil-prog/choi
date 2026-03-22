@@ -38,6 +38,7 @@ function loadApiKey() {
     document.getElementById('gemini-key-input').value = saved;
     updateApiStatus(true);
   }
+  updateGenerateBtn();
 }
 
 function saveApiKey() {
@@ -49,6 +50,7 @@ function saveApiKey() {
   state.geminiApiKey = val;
   localStorage.setItem(STORAGE_KEY, val);
   updateApiStatus(true);
+  updateGenerateBtn();
 }
 
 function clearApiKey() {
@@ -56,6 +58,16 @@ function clearApiKey() {
   localStorage.removeItem(STORAGE_KEY);
   document.getElementById('gemini-key-input').value = '';
   updateApiStatus(false);
+  updateGenerateBtn();
+}
+
+/** 생성 버튼 활성/비활성 (API 키 유무에 따라) */
+function updateGenerateBtn() {
+  const btn = document.querySelector('.generate-btn');
+  if (!btn) return;
+  const hasKey = !!state.geminiApiKey;
+  btn.disabled = !hasKey;
+  btn.title = hasKey ? '' : 'Gemini API 키를 먼저 저장해주세요';
 }
 
 /* ─── 입력값 읽기 ────────────────────────────────────── */
@@ -74,10 +86,6 @@ function getFormValues() {
 function validate({ childStory }) {
   if (!childStory) {
     showFormError('아이의 이야기를 입력해주세요!');
-    return false;
-  }
-  if (!state.geminiApiKey) {
-    showFormError('삽화 생성을 위해 Gemini API 키를 먼저 설정해주세요!');
     return false;
   }
   return true;
@@ -201,6 +209,7 @@ function resetApp() {
   clearFormError();
 
   showSection('input-form');
+  updateGenerateBtn();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

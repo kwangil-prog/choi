@@ -47,7 +47,7 @@ exports.handler = async (event) => {
   }
 
   const GEMINI_ENDPOINT =
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent';
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent';
 
   try {
     const response = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
