@@ -1,0 +1,15 @@
+{
+  "name": "imagination-world",
+  "version": "1.0.0",
+  "description": "상상 나라 - 아이들의 이야기를 동화책으로 변환하는 웹 앱",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}
